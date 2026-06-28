@@ -45,12 +45,14 @@ The SAS MCP server has many tools. Pick the **smallest set** for the step you're
 | Get the log | `get_job_log` |
 | Cancel | `cancel_job` |
 
-## Reports (Visual Analytics)
+## Data insights
 | Goal | Tool |
 |------|------|
-| List / open reports | `list_reports`, `get_report`, `get_report_content` |
-| Create / update | `create_report`, `update_report_content`, `create_report_from_template` |
-| Validate / image / PDF | `validate_report_content`, `get_report_image`, `export_report_pdf` |
+| Natural-language insight into a column (drivers, outliers) | `explain_data` |
+
+> SAS **Visual Analytics report** authoring (creating/editing/exporting saved VA
+> reports) is **not** part of this server — it is handled by a separate
+> reporting agent. Use `render_chart` for in-chat visualisations.
 
 ## Rules of thumb
 - **Discover before you analyse** — never guess column names.

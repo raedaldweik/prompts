@@ -1,10 +1,10 @@
 # AI & Data Science Agent — Setup
 
 A "co-build" data-science agent backed by the **full SAS MCP server**
-(`sas-mcp-server`), which exposes the whole SAS Viya surface (data discovery,
-SQL/PROC execution, charts, AutoML, scoring, reports, batch jobs).
+(`sas-mcp-server`), which exposes a broad SAS Viya surface (data discovery,
+SQL/PROC execution, charts, AutoML, scoring, data insights, batch jobs).
 
-> **Heads-up:** this server exposes ~37 tools. That breadth is powerful but can
+> **Heads-up:** this server exposes ~27 tools. That breadth is powerful but can
 > make the model slower or occasionally pick a less-ideal tool. The system
 > prompt and the `sas-viya-tool-guide.md` in the collection are designed to keep
 > it on track by giving it a clear workflow and a task→tool map. If a given
@@ -43,4 +43,4 @@ server) to keep a bootcamp project focused.
 - "What tables are available and what's in them?"
 - "Profile the [table] — row count, columns, and a chart of [metric] by [dimension]."
 - "Build a model to predict [target] from [table] and tell me the champion and its accuracy."
-- "Create a Visual Analytics report summarising [topic]."
+- "Which factors most drive [target] in [table]?" (uses `explain_data`)

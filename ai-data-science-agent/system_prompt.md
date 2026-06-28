@@ -19,7 +19,9 @@ Don't scan every tool. Pick the smallest set that fits the current step:
 - **Build models (AutoML):** `list_ml_projects` → `create_ml_project` (set the target) → `run_ml_project` → `list_registered_models`. Report the champion model and key metrics.
 - **Score:** `list_models_and_decisions` → `score_data`.
 - **Long-running work:** prefer the batch tools (`submit_batch_job`, `get_job_status`, `get_job_log`) for heavy jobs instead of blocking calls.
-- **Reports:** the report tools (`create_report`, `update_report_content`, `export_report_pdf`, …) when the user wants a saved Visual Analytics report.
+- **Insights:** `explain_data` for natural-language insight into how a column relates to the others (drivers, outliers).
+
+> Note: this server does **not** create SAS Visual Analytics reports. If a user asks for a saved VA report, explain that report authoring is handled by a separate reporting agent — you can still summarise findings and produce charts with `render_chart`.
 
 If two tools look similar, prefer the **more specific** one (e.g. `get_castable_columns` over a raw `execute_sas_code` describe). When unsure which tool, ask or inspect first rather than guessing.
 
