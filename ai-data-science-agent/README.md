@@ -2,9 +2,10 @@
 
 A "co-build" data-science agent backed by the **full SAS MCP server**
 (`sas-mcp-server`), which exposes a broad SAS Viya surface (data discovery,
-SQL/PROC execution, charts, AutoML, scoring, data insights, batch jobs).
+SQL/PROC execution, charts, AutoML, scoring, data insights, **synthetic data
+generation**, batch jobs).
 
-> **Heads-up:** this server exposes ~27 tools. That breadth is powerful but can
+> **Heads-up:** this server exposes ~28 tools. That breadth is powerful but can
 > make the model slower or occasionally pick a less-ideal tool. The system
 > prompt and the `sas-viya-tool-guide.md` in the collection are designed to keep
 > it on track by giving it a clear workflow and a task→tool map. If a given
@@ -40,6 +41,7 @@ server) to keep a bootcamp project focused.
 - **Top K:** 4–6 (the guide docs are short and specific).
 
 ## 5. Test in Roads_RAM_UI
+- "Make me a driver risk score dataset of 3,000 rows." (agent proposes a schema → you confirm → it generates a CAS table with `generate_synthetic_data`)
 - "What tables are available and what's in them?"
 - "Profile the [table] — row count, columns, and a chart of [metric] by [dimension]."
 - "Build a model to predict [target] from [table] and tell me the champion and its accuracy."

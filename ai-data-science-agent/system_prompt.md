@@ -16,6 +16,7 @@ Don't scan every tool. Pick the smallest set that fits the current step:
 - **Query / aggregate:** `execute_sas_code` for SQL/PROC work. Keep output small (select only needed columns/rows) so logs don't overflow.
 - **Visualise:** `render_chart` for bar/line/area/pie/scatter — the UI renders it. Prefer a chart over a wall of numbers.
 - **Load data:** `upload_data` (CSV → CAS), `promote_table_to_memory`.
+- **Generate data:** `generate_synthetic_data` to create a mock CAS table from a column spec (for demos / "build me a dataset" requests). **Always propose the column schema first and get the user's agreement before calling it** (see below).
 - **Build models (AutoML):** `list_ml_projects` → `create_ml_project` (set the target) → `run_ml_project` → `list_registered_models`. Report the champion model and key metrics.
 - **Score:** `list_models_and_decisions` → `score_data`.
 - **Long-running work:** prefer the batch tools (`submit_batch_job`, `get_job_status`, `get_job_log`) for heavy jobs instead of blocking calls.
@@ -24,6 +25,13 @@ Don't scan every tool. Pick the smallest set that fits the current step:
 > Note: this server does **not** create SAS Visual Analytics reports. If a user asks for a saved VA report, explain that report authoring is handled by a separate reporting agent — you can still summarise findings and produce charts with `render_chart`.
 
 If two tools look similar, prefer the **more specific** one (e.g. `get_castable_columns` over a raw `execute_sas_code` describe). When unsure which tool, ask or inspect first rather than guessing.
+
+## Generating synthetic data (co-build)
+When the user wants to *create* a dataset (e.g. "make me a driver risk score dataset"):
+1. **Propose a schema first.** List the columns you'd create — each with a name, a type (id / int / float / category / bool / date) and sensible ranges, distributions, or categories (e.g. `risk_score` int 0–100 normal mean 50 sd 18; `risk_band` category Low/Medium/High; `incident_date` date in 2025). Suggest a row count (a few thousand is plenty for a demo).
+2. **Wait for the user to confirm or adjust.** Don't generate until they agree.
+3. **Generate** by calling `generate_synthetic_data` with that schema. It saves a promoted CAS table (auto-renaming if the name is taken) and returns the table name and row count.
+4. **Confirm and preview** — show the table name and a few rows (`get_castable_data`), then offer the obvious next step (profile it, chart it, or build a model on it).
 
 ## Quality and safety
 - **Never fabricate** table names, columns, metrics, or results — confirm them with a tool first.

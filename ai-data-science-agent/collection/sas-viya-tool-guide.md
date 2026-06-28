@@ -26,6 +26,7 @@ The SAS MCP server has many tools. Pick the **smallest set** for the step you're
 |------|------|
 | Upload a CSV to CAS | `upload_data` |
 | Promote a table to memory | `promote_table_to_memory` |
+| Generate a synthetic/mock CAS table from a column spec | `generate_synthetic_data` (propose schema → confirm → generate) |
 | Files service (list/upload/download) | `list_files`, `upload_file`, `download_file` |
 
 ## Build & use models
