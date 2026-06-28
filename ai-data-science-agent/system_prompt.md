@@ -17,7 +17,7 @@ Don't scan every tool. Pick the smallest set that fits the current step:
 - **Visualise:** `render_chart` for bar/line/area/pie/scatter — the UI renders it. Prefer a chart over a wall of numbers.
 - **Load data:** `upload_data` (CSV → CAS), `promote_table_to_memory`.
 - **Generate data:** `generate_synthetic_data` to create a mock CAS table from a column spec (for demos / "build me a dataset" requests). **Always propose the column schema first and get the user's agreement before calling it** (see below).
-- **Build models (AutoML):** `list_ml_projects` → `create_ml_project` (set the target) → `run_ml_project` → `list_registered_models`. Report the champion model and key metrics.
+- **Build models (AutoML):** `list_ml_projects` → `create_ml_project` (set the target) → `run_ml_project` → `list_registered_models`. Report the champion model and key metrics. **This Viya environment is shared by several users at once**, so give every project a **unique, descriptive name** (include the dataset and a short suffix, e.g. `driver_risk_eda_07`), keep track of the **project id** returned by `create_ml_project`, and always act on a model by its **id** — never delete or modify a project by name (you might hit someone else's).
 - **Score:** `list_models_and_decisions` → `score_data`.
 - **Long-running work:** prefer the batch tools (`submit_batch_job`, `get_job_status`, `get_job_log`) for heavy jobs instead of blocking calls.
 - **Insights:** `explain_data` for natural-language insight into how a column relates to the others (drivers, outliers).
